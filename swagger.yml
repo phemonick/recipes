@@ -1,0 +1,861 @@
+swagger: '2.0'
+info:
+  version: 'v1'
+  title: The social service api
+  description: >-
+    This a recipe micro-service api documentation. This documentation is
+
+    meant for fleshing out required endpoints, http verbs and response
+
+    needed to complete this service.
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+host: localhost:3000
+basePath: /api/v1
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /recipes/{recipeId}/ingredients:
+    get:
+      description: This handles request that returns a collection of data
+      summary: Get All
+      tags:
+      - recipes
+      operationId: Get All
+      produces:
+      - application/json
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Handles limiting of collection retured for this query
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: This set the next avaliable dataset to return
+      - name: q
+        in: query
+        required: false
+        type: string
+        description: This is used to  search for specific dataset. When used, data matching the value sent would be retured
+      - name: Content-Type
+        in: header
+        required: false
+        default: application/json
+        type: string
+        description: This specifies how the content should be sent to the server
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Ingredients'
+          examples: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: RecipesIngredientsByRecipeId
+      tags:
+      - recipes
+      operationId: RecipesIngredientsByRecipeId
+      produces:
+      - application/json
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Ingredient'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Ingredient'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /recipes/{recipeId}:
+    get:
+      description: Handles request that involves single resource
+      summary: Gets a single Recipe
+      tags:
+      - recipes
+      operationId: Gets a single Recipe
+      produces:
+      - application/json
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Recipe'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Handles deleting of Recipe
+      summary: Deletes a single Recipe
+      tags:
+      - recipes
+      operationId: Deletes a single Recipe
+      produces:
+      - application/json
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Message'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Handles updating of Recipe
+      summary: Updates a single Recipe
+      tags:
+      - recipes
+      operationId: Updates a single Recipe
+      produces:
+      - application/json
+      parameters:
+      - name: recipeId
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Recipe'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Recipe'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /recipes:
+    get:
+      description: This handles request that returns a collection of data
+      summary: Get All
+      tags:
+      - recipes
+      operationId: Get All1
+      produces:
+      - application/json
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Handles limiting of collection retured for this query
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: This set the next avaliable dataset to return
+      - name: q
+        in: query
+        required: false
+        type: string
+        description: This is used to  search for specific dataset. When used, data matching the value sent would be retured
+      - name: Content-Type
+        in: header
+        required: false
+        default: application/json
+        type: string
+        description: This specifies how the content should be sent to the server
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Recipes'
+          examples: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /recipes?limit=10&page=4&q=ogbono soup
+          headers:
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Get All1
+        x-testDescription: This handles request that returns a collection of data
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: Recipes
+      tags:
+      - recipes
+      operationId: Recipes
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Recipe'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Recipe'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /ingredients/{ingredientId}:
+    get:
+      description: Handles request that involves single resource
+      summary: Gets a single Ingredients
+      tags:
+      - ingredients
+      operationId: Gets a single Ingredients
+      produces:
+      - application/json
+      parameters:
+      - name: ingredientId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Ingredient'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Handles deleting of Ingredients
+      summary: Deletes a single Ingredients
+      tags:
+      - ingredients
+      operationId: Deletes a single Ingredients
+      produces:
+      - application/json
+      parameters:
+      - name: ingredientId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Message'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Handles updating of Ingredients
+      summary: Updates a single Ingredients
+      tags:
+      - ingredients
+      operationId: Updates a single Ingredients
+      produces:
+      - application/json
+      parameters:
+      - name: ingredientId
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Ingredient'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Ingredient'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /categories/{categoryId}:
+    get:
+      description: Handles request that involves single resource
+      summary: Gets a single categories
+      tags:
+      - categories
+      operationId: Gets a single categories
+      produces:
+      - application/json
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Handles deleting of categories
+      summary: Deletes a single categories
+      tags:
+      - categories
+      operationId: Deletes a single categories
+      produces:
+      - application/json
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Message'
+          examples: {}
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: Handles updating of categories
+      summary: Updates a single categories
+      tags:
+      - categories
+      operationId: Updates a single categories
+      produces:
+      - application/json
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Ingredient'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        404:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+        default:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /categories:
+    get:
+      description: This handles request that returns a collection of data
+      summary: Get All
+      tags:
+      - categories
+      operationId: Get All2
+      produces:
+      - application/json
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: Handles limiting of collection retured for this query
+      - name: page
+        in: query
+        required: false
+        type: integer
+        format: int32
+        description: This set the next avaliable dataset to return
+      - name: q
+        in: query
+        required: false
+        type: string
+        description: This is used to  search for specific dataset. When used, data matching the value sent would be retured
+      - name: Content-Type
+        in: header
+        required: false
+        default: application/json
+        type: string
+        description: This specifies how the content should be sent to the server
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Categories'
+          examples: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /categories?limit=10&page=4&q=ogbono soup
+          headers:
+            Content-Type: application/json
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Get All1
+        x-testDescription: This handles request that returns a collection of data
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: Categories
+      tags:
+      - categories
+      operationId: Categories
+      produces:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/Category'
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+          examples: {}
+        400:
+          description: 'TODO: Add error message'
+          schema:
+            $ref: '#/definitions/Error25'
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  Error:
+    title: Error
+    description: Defines hpw error response shoould be handled.
+    type: object
+    properties:
+      code:
+        description: ''
+        type: integer
+        format: int32
+      message:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+      errors:
+        description: ''
+        type: object
+    required:
+    - code
+    - message
+    - type
+    - errors
+  Message:
+    title: Message
+    description: Handles all messages sent as response from the server
+    example:
+      message: Resource with id 1 has been updated
+    type: object
+    properties:
+      message:
+        description: ''
+        type: string
+    required:
+    - message
+  Recipe:
+    title: Recipe
+    type: object
+    properties:
+      name:
+        description: Name of recipe
+        type: string
+      category_id:
+        description: ''
+        type: string
+      user_id:
+        description: ''
+        type: string
+      id:
+        description: unique id used foridentifying recipe
+        type: string
+      descripion:
+        description: A little description about the recipe
+        type: string
+      instruction:
+        description: List of instraction detailing how recipe should be made
+        type: string
+      photos:
+        description: ''
+        type: object
+      created_at:
+        description: ''
+        type: string
+        format: date-time
+      updated_at:
+        description: ''
+        type: string
+        format: date-time
+    required:
+    - name
+    - category_id
+    - user_id
+  Recipes:
+    title: Recipes
+    description: This contains a list of recipes
+    type: object
+    properties:
+      data:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Recipe'
+      meta:
+        $ref: '#/definitions/Meta'
+    required:
+    - data
+    - meta
+  Meta:
+    title: Meta
+    description: This contains information about how users should paginate resource. It also contain information about the resource on the server.
+    example:
+      totalCount: 1000
+      pageCount: 50
+      currentPage: 1
+      perPage: 20
+    type: object
+    properties:
+      totalCount:
+        description: Contains information about the total number of resource found
+        example: 10
+        type: integer
+        format: int32
+      pageCount:
+        description: Contains the total number of page that can be navigated
+        example: 5
+        type: integer
+        format: int32
+      currentPage:
+        description: Contains information about the current page the user is on
+        example: 5
+        type: integer
+        format: int32
+      perPage:
+        description: Contains the total number of results to return. Each page result return should not be greater than this number
+        example: 5
+        type: integer
+        format: int32
+    required:
+    - totalCount
+    - pageCount
+    - currentPage
+    - perPage
+  Category:
+    title: Category
+    description: This is used to categorise recipes
+    example:
+      id: 8349ejwkejew
+      title: Snacks
+      descripion: Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled.
+      created_at: 2016-02-28T16:41:41.0900000Z
+      updated_at: 2016-02-28T16:41:41.0900000Z
+    type: object
+    properties:
+      title:
+        description: Name of recipe
+        type: string
+      id:
+        description: unique id used foridentifying category
+        type: string
+      descripion:
+        description: A little description about the recipe
+        type: string
+      created_at:
+        description: ''
+        type: string
+        format: date-time
+      updated_at:
+        description: ''
+        type: string
+        format: date-time
+    required:
+    - title
+  Categories:
+    title: Categories
+    description: This contains a list off all categories
+    type: object
+    properties:
+      data:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Category'
+      meta:
+        $ref: '#/definitions/Meta'
+    required:
+    - data
+    - meta
+  Ingredient:
+    title: Ingredient
+    description: This is used to categorise recipes
+    example:
+      id: 8349ejwkejew
+      name: tomatoes
+      quantity: 20
+      unit: kg
+      recipe_id: wdkwnkn0enknwen
+      created_at: 2016-02-28T16:41:41.0900000Z
+      updated_at: 2016-02-28T16:41:41.0900000Z
+    type: object
+    properties:
+      name:
+        description: Name of ingredient
+        type: string
+      recipe_id:
+        description: ''
+        type: string
+      id:
+        description: unique id used for identifying ingredient
+        type: string
+      quantity:
+        description: This tells the amount of the ingredient needed to make a recipe
+        type: string
+      unit:
+        description: This field descripbes the unit of measurement used to measure an ingredient
+        type: string
+      created_at:
+        description: ''
+        type: string
+        format: date-time
+      updated_at:
+        description: ''
+        type: string
+        format: date-time
+    required:
+    - name
+    - recipe_id
+  Ingredients:
+    title: Ingredients
+    description: This contains a list off all ingredients
+    type: object
+    properties:
+      data:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/Ingredient'
+      meta:
+        $ref: '#/definitions/Meta'
+    required:
+    - data
+    - meta
+  Error25:
+    title: Error25
+    description: Defines hpw error response shoould be handled.
+    type: object
+    properties:
+      code:
+        description: ''
+        type: integer
+        format: int32
+      message:
+        description: ''
+        type: string
+      type:
+        description: ''
+        type: string
+      errors:
+        description: ''
+        type: object
+    required:
+    - code
+    - message
+    - type
+    - errors

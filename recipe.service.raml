@@ -1,0 +1,484 @@
+#%RAML 1.0
+baseUri: http://localhost:3000/api/v1
+protocols: [ HTTPS, HTTP ]
+title: The social service api
+description: Movies service api
+version: v1
+mediaType: [ application/json ]
+securedBy:
+documentation:
+  - title: Home
+    content: |
+      This a recipe micro-service api documentation. This documentation is
+      meant for fleshing out required endpoints, http verbs and response
+      needed to complete this service.
+
+types:
+  Error:
+    type: object
+    displayName: Error Handler
+    description: Defines hpw error response shoould be handled.
+    properties:
+      code: integer
+      message: string
+      type: string
+      errors: object
+    examples:
+      first:
+        code: 400
+        type: validation_failed
+        message: Invalid parameters forund when trying to validate your form
+        errors: {}
+  Message:
+    type: object
+    displayName: Message handler
+    description: Handles all messages sent as response from the server
+    properties:
+      message: string
+    example:  |
+      {
+        "message": "Resource with id 1 has been updated"
+      }
+  Recipe:
+    type: object
+    displayName: Single Recipe
+    properties:
+      id?:
+        displayName: Recipe id
+        description: unique id used foridentifying recipe
+        type: string
+      name:
+        type: string
+        description: Name of recipe
+        displayName: Recipe name
+      descripion:
+        type: string
+        displayName: Description of recipe
+        required: false
+        description: A little description about the recipe
+      instruction:
+        displayName: Recipe instructions
+        type: string
+        required: false
+        description: List of instraction detailing how recipe should be made
+      photos?: array
+      category_id: string
+      user_id:
+        displayName: User id of owner
+        type: string
+      created_at?:
+        displayName: Date created
+        type: datetime
+      updated_at?:
+        displayName: Date updated
+        type: datetime
+    example:
+      id: "sajanjs9i0i23023"
+      name: "ogbono soup"
+      descripion: "Lorem Ipsum has been the industry's standard
+      dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+      instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      photos:
+        - https://randomuser.me/api/portraits/med/men/83.jpg
+        - https://randomuser.me/api/portraits/med/med/83.jpg
+      category_id: "sajanjs9i0i23023"
+      user_id: "B9jsdjksdHsjdkd"
+      created_at: 2016-02-28T16:41:41.090Z
+      updated_at: 2016-02-28T16:41:41.090Z
+
+  Recipes:
+    displayName: List of recipes
+    description: This contains a list of recipes
+    type: object
+    properties:
+      data:
+        displayName: All recipes
+        description: Contains an array of all recipes
+        type: Recipe[]
+      meta: Meta
+    example:
+      data:
+        - id: "sajanjs9i0i23023"
+          name: "ogbono soup"
+          descripion: "Lorem Ipsum has been the industry's standard
+          dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+          instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          photos:
+            - https://randomuser.me/api/portraits/med/men/83.jpg
+            - https://randomuser.me/api/portraits/med/med/83.jpg
+          category_id: "sajanjs9i0i23023"
+          user_id: "B9jsdjksdHsjdkd"
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+        - id: "i8293y4823489y2984y"
+          name: "Banga soup"
+          descripion: "ever since the 1500s,when an unknown printer took
+          dummy text  a galley of type and scrambled."
+          instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          photos:
+            - https://randomuser.me/api/portraits/med/men/44.jpg
+            - https://randomuser.me/api/portraits/med/med/23.jpg
+          category_id: "sajanjs9i0i23023"
+          user_id: "B9jsdjksdHsjdkd"
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+      meta:
+        {
+          "totalCount": 1000,
+          "pageCount": 50,
+          "currentPage": 1,
+          "perPage": 20
+        }
+  RecipeBody:
+    displayName: Recipe request body
+    description: This shows the data allowed to be sent as request when creating or updating a recipe
+    type: Recipe
+    example:
+      name: "ogbono soup"
+      descripion: "Lorem Ipsum has been the industry's standard
+      dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+      instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      photos:
+        - https://randomuser.me/api/portraits/med/men/83.jpg
+        - https://randomuser.me/api/portraits/med/med/83.jpg
+      category_id: "sajanjs9i0i23023"
+      user_id: "B9jsdjksdHsjdkd"
+
+  Category:
+    displayName: Recipe Category
+    description: This is used to categorise recipes
+    type: object
+    properties:
+      id?:
+        displayName: Category id
+        description: unique id used foridentifying category
+        type: string
+      title:
+        type: string
+        description: Name of recipe
+        displayName: Category name
+      descripion:
+        type: string
+        displayName: Description of recipe
+        required: false
+        description: A little description about the recipe
+      created_at?:
+        displayName: Date created
+        type: datetime
+      updated_at?:
+        displayName: Date updated
+        type: datetime
+    example:
+      id: "8349ejwkejew"
+      title: "Snacks"
+      descripion: "Lorem Ipsum has been the industry's standard
+      dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+      created_at: 2016-02-28T16:41:41.090Z
+      updated_at: 2016-02-28T16:41:41.090Z
+
+  Categories:
+    displayName: All categories
+    description: This contains a list off all categories
+    type: object
+    properties:
+      data:
+        displayName: Categories
+        description: Contains an array of all recipes
+        type: Category[]
+      meta: Meta
+    example:
+      data:
+        - id: "jjsdjdusdbudjsdjjsd"
+          title: "soup"
+          descripion: "Lorem Ipsum has been the industry's standard
+          dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+        - id: "kdnmksdndNBs-d"
+          title: "snnack"
+          descripion: "Lorem Ipsum has been the industry's standard
+          dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+      meta:
+        {
+          "totalCount": 80,
+          "pageCount": 4,
+          "currentPage": 1,
+          "perPage": 20
+        }
+  CategoryBody:
+    displayName: Category request body
+    description: This shows the data allowed to be sent as request when creating or updating a category
+    type: Category
+    example:
+      title: "soup"
+      descripion: "Lorem Ipsum has been the industry's standard"
+
+  Ingredient:
+    displayName: Recipe Category
+    description: This is used to categorise recipes
+    type: object
+    properties:
+      id?:
+        displayName: Ingredient id
+        description: unique id used for identifying ingredient
+        type: string
+      name:
+        type: string
+        description: Name of ingredient
+        displayName: Ingredient name
+      quantity:
+        type: string
+        displayName: Quantiy  of ingredient
+        required: false
+        description: This tells the amount of the ingredient needed to make a recipe
+      unit:
+        type: string
+        displayName: Unit of Measurement
+        required: false
+        description: "This field descripbes the unit of measurement used to measure an
+        ingredient"
+      recipe_id:
+        displayName: Recipe the ingredient belongs to
+        type: string
+      created_at?:
+        displayName: Date created
+        type: datetime
+      updated_at?:
+        displayName: Date updated
+        type: datetime
+    example:
+      id: "8349ejwkejew"
+      name: "tomatoes"
+      quantity: "20"
+      unit: "kg"
+      recipe_id: "wdkwnkn0enknwen"
+      created_at: 2016-02-28T16:41:41.090Z
+      updated_at: 2016-02-28T16:41:41.090Z
+
+  Ingredients:
+    displayName: All ingredients
+    description: This contains a list off all ingredients
+    type: object
+    properties:
+      data:
+        displayName: Ingredients
+        description: Contains an array of all ingredients
+        type: Ingredient[]
+      meta: Meta
+    example:
+      data:
+        - id: "8349ejwkejew"
+          name: "tomatoes"
+          quantity: "20"
+          unit: "kg"
+          recipe_id: "wdkwnkn0enknwen"
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+        - id: "ksndksdnknds"
+          name: "water"
+          quantity: "20"
+          unit: "liters"
+          recipe_id: "wdkwnkn0enknwen"
+          created_at: 2016-02-28T16:41:41.090Z
+          updated_at: 2016-02-28T16:41:41.090Z
+      meta:
+        {
+          "totalCount": 80,
+          "pageCount": 4,
+          "currentPage": 1,
+          "perPage": 20
+        }
+  IngredientBody:
+    displayName: Ingredient request body
+    description: This shows the data allowed to be sent as request when creating or updating a Ingedient
+    type: Ingredient
+    example:
+      name: "tomatoes"
+      quantity: "20"
+      unit: "kg"
+      recipe_id: "wdkwnkn0enknwen"
+
+  Meta:
+    displayName: Response metadata
+    description: "This contains information about how users should paginate
+    resource. It also contain information about the resource on the server."
+    type: object
+    properties:
+      totalCount:
+        displayName: Total Count
+        description: "Contains information about the total number of resource
+        found"
+        type: integer
+        example: 10
+      pageCount:
+        displayName: Page Count
+        description: Contains the total number of page that can be navigated
+        type: integer
+        example: 5
+      currentPage:
+        displayName: Current Page
+        description: Contains information about the current page the user is on
+        type: integer
+        example: 5
+      perPage:
+        displayName: Resource per page
+        description: "Contains the total number of results to return. Each page
+        result return should not be greater than this number"
+        type: integer
+        example: 5
+    example: |
+      {
+        "totalCount": 1000,
+        "pageCount": 50,
+        "currentPage": 1,
+        "perPage": 20
+      }
+
+  Content-Type:
+    type: string
+    description: This specifies how the content should be sent to the server
+    required: true
+    default: application/json
+
+resourceTypes:
+  Data:
+    get:
+      description: Handles request that involves single resource
+      displayName: Gets a single <<ResourceName>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>
+        404:
+          body:
+            application/json:
+              type: <<Error>>
+    patch:
+      description: Handles updating of <<ResourceName>>
+      displayName: Updates a single <<ResourceName>>
+      body:
+        application/json:
+          type: <<Type>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>
+        404:
+          body:
+            application/json:
+              type: <<Error>>
+        500:
+          body:
+            application/json:
+              type: <<Error>>
+        400:
+          body:
+            application/json:
+              type: <<Error>>
+    delete:
+      description: Handles deleting of <<ResourceName>>
+      displayName: Deletes a single <<ResourceName>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<message>>
+
+        404:
+          body:
+            application/json:
+              type: <<Error>>
+        500:
+          body:
+            application/json:
+              type: <<Error>>
+
+
+
+  Collection:
+    description: Resource type collection for Api Endopoints
+    displayName: Resource type collection
+    get:
+      description: This handles request that returns a collection of data
+      displayName: Get All
+      queryParameters:
+        limit:
+          type: integer
+          description: Handles limiting of collection retured for this query
+          required: false
+          example: 10
+        page:
+          displayName: Page to return
+          type: integer
+          description: This set the next avaliable dataset to return
+          required: false
+          example: 4
+        q:
+          type: string
+          description: "This is used to  search for specific dataset. When used, data
+          matching the value sent would be retured"
+          required: false
+          example: "ogbono soup"
+      headers:
+        Content-Type:
+          type: string
+          description: This specifies how the content should be sent to the server
+          required: false
+          default: application/json
+      responses:
+        200:
+          headers:
+            type: Content-Type
+          body:
+            application/json:
+              type: <<ReturnItem>>
+    post:
+      body:
+        application/json:
+          type: <<item>>
+          displayName: Resource to create
+          description: "Contains data  been sent to the server via the request body"
+      responses:
+        201:
+          body:
+            application/json:
+              type: <<PostItem>>
+
+        400:
+          body:
+            application/json:
+              type: Error
+
+
+/recipes:
+  displayName: Get all recipes
+  description: This endpoint is used for getting all recipe
+  type:   { Collection: { ReturnItem : Recipes, item: RecipeBody, PostItem: Recipe } }
+
+  /{recipeId}:
+    displayName: Get Recipe
+    description: Performs GET,DELETE and UPDATE on recipe resource.
+    type: { Data: {ResourceName: Recipe, item: Recipe, Error: Error, message: Message, Type: RecipeBody} }
+    /ingredients:
+      displayName: Get all and create ingredients.
+      description: This endpoint is used for getting and creating ingredients.
+      type:   { Collection: { ReturnItem: Ingredients, item : IngredientBody, PostItem: Ingredient } }
+
+/ingredients/{ingredientId}:
+  displayName: Ingredient
+  description: This endpoint is used for getting, deleting and updating ingredients.
+  type: { Data: {ResourceName: Ingredients, item: Ingredient, Error: Error, message: Message, Type: IngredientBody } }
+
+/categories:
+  displayName: Get all categories
+  description: This endpoint is used for getting all categories.
+  type:   { Collection: { ReturnItem: Categories, item : CategoryBody, PostItem: Category } }
+
+  /{categoryId}:
+    displayName: Category crud
+    description: Contains endpoints for performing crud operations for categories
+    type: { Data: {ResourceName: categories, item: Category, Error: Error, message: Message, Type: IngredientBody } }

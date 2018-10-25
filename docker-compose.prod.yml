@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  mico-recipe/recipe-service:
+    container_name: recipe-service
+    image: node:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=test
+      - DB_URL=mongodb://localhost/recipe
+    ports:
+      - "8080:8085"
+    depends_on:
+      - mongo
+    networks:
+      - recipe_network
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    networks:
+      - recipe_network
+networks:
+  recipe_network:
+    driver: bridge
